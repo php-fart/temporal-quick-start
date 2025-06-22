@@ -8,6 +8,7 @@ use App\Module\Fiscal\FiscalActivity;
 use App\Module\Fiscal\FiscalInfo;
 use App\Module\Payment\Endpoint\Temporal\Dto\PaymentInfo;
 use App\Module\Payment\Endpoint\Temporal\Dto\Transaction;
+use App\Module\Payment\Endpoint\Temporal\Dto\TransactionResult;
 use Carbon\CarbonInterval;
 use Spiral\TemporalBridge\Attribute\AssignWorker;
 use Temporal\Activity\ActivityOptions;
@@ -26,22 +27,10 @@ final readonly class CreatePaymentWorkflow
 {
     public const string TASK_QUEUE = 'payment_queue';
 
-    private ActivityProxy|PaymentTransactionActivity $pay;
     private ActivityProxy|FiscalActivity $fiscalCode;
 
     public function __construct()
     {
-        $this->pay = Workflow::newActivityStub(
-            PaymentTransactionActivity::class,
-            ActivityOptions::new()
-                ->withStartToCloseTimeout(CarbonInterval::minute())
-                ->withRetryOptions(
-                    RetryOptions::new()
-                        ->withMaximumAttempts(10),
-                )
-                ->withTaskQueue(PaymentTransactionActivity::TASK_QUEUE),
-        );
-
         $this->fiscalCode = Workflow::newActivityStub(
             FiscalActivity::class,
             ActivityOptions::new()
@@ -64,7 +53,20 @@ final readonly class CreatePaymentWorkflow
         $transactionUuid = yield Workflow::uuid7();
 
         try {
-            $transactionResult = yield $this->pay->handle($info, $transactionUuid);
+            # Start the payment transaction activity
+            $transactionResult = yield Workflow::executeActivity(
+                'payment_transaction.handle',
+                [$info, $transactionUuid],
+                options: ActivityOptions::new()
+                    ->withStartToCloseTimeout(CarbonInterval::minute())
+                    ->withRetryOptions(
+                        RetryOptions::new()
+                            ->withMaximumAttempts(10),
+                    )
+                    ->withTaskQueue(PaymentTransactionActivity::TASK_QUEUE)
+                    ->withSummary('Processing payment transaction ' . $transactionUuid->toString()),
+                returnType: TransactionResult::class,
+            );
         } catch (ActivityFailure $e) {
             throw new CanceledFailure(
                 'Payment transaction was canceled due to an error',
