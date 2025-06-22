@@ -5,6 +5,9 @@
 */runtime/
 
 /rr*
+/dolt*
+/temporal
+/temporal.exe
 /protoc-gen-php-grpc*
 
 /.env

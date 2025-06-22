@@ -8,6 +8,12 @@ installation process a breeze.
 To help you get started, we've provided some instructions for configuring the individual packages that were installed.
 Depending on the packages you chose during the installation, you'll find the following next steps:
 
+## How to run
+
+`./temporal server start-dev --log-level error --color always`
+`./dolt sql-server`
+`./rr serve`
+
 ## Configuration
 
 ### Environment variables
