@@ -6,12 +6,10 @@ namespace App\Application;
 
 use Spiral\Boot\Bootloader\CoreBootloader;
 use Spiral\Bootloader as Framework;
-use Spiral\Bootloader\Http\HttpBootloader;
 use Spiral\Cycle\Bootloader as CycleBridge;
 use Spiral\Debug\Bootloader\DumperBootloader;
 use Spiral\DotEnv\Bootloader\DotenvBootloader;
 use Spiral\Monolog\Bootloader\MonologBootloader;
-use Spiral\Nyholm\Bootloader\NyholmBootloader;
 use Spiral\Prototype\Bootloader\PrototypeBootloader;
 use Spiral\RoadRunnerBridge\Bootloader as RoadRunnerBridge;
 use Spiral\Scaffolder\Bootloader\ScaffolderBootloader;
@@ -54,7 +52,6 @@ class Kernel extends \Spiral\Framework\Kernel
 
             // RoadRunner
             RoadRunnerBridge\LoggerBootloader::class,
-            RoadRunnerBridge\HttpBootloader::class,
 
             // Core Services
             Framework\SnapshotsBootloader::class,
@@ -64,18 +61,10 @@ class Kernel extends \Spiral\Framework\Kernel
             Framework\Security\FiltersBootloader::class,
             Framework\Security\GuardBootloader::class,
 
-            // HTTP extensions
-            HttpBootloader::class,
-            Framework\Http\RouterBootloader::class,
-            Framework\Http\JsonPayloadsBootloader::class,
-            Framework\Http\CookiesBootloader::class,
-            Framework\Http\SessionBootloader::class,
-            Framework\Http\CsrfBootloader::class,
-            Framework\Http\PaginationBootloader::class,
-
             // Databases
             CycleBridge\DatabaseBootloader::class,
             CycleBridge\MigrationsBootloader::class,
+            CycleBridge\DisconnectsBootloader::class,
 
             // ORM
             CycleBridge\SchemaBootloader::class,
@@ -95,18 +84,16 @@ class Kernel extends \Spiral\Framework\Kernel
             TemporalBridge\PrototypeBootloader::class,
             TemporalBridge\TemporalBridgeBootloader::class,
 
-            NyholmBootloader::class,
-
             ValidationBootloader::class,
             ValidatorBootloader::class,
 
             // Console commands
             Framework\CommandBootloader::class,
-            RoadRunnerBridge\CommandBootloader::class,
-            CycleBridge\CommandBootloader::class,
-            ScaffolderBootloader::class,
-            RoadRunnerBridge\ScaffolderBootloader::class,
-            CycleBridge\ScaffolderBootloader::class,
+//            RoadRunnerBridge\CommandBootloader::class,
+//            CycleBridge\CommandBootloader::class,
+//            ScaffolderBootloader::class,
+//            RoadRunnerBridge\ScaffolderBootloader::class,
+//            CycleBridge\ScaffolderBootloader::class,
 
             // Fast code prototyping
             PrototypeBootloader::class,

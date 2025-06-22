@@ -12,6 +12,7 @@
     findUnusedCode="false"
     ensureArrayStringOffsetsExist="true"
     addParamDefaultToDocblockType="true"
+    ensureOverrideAttribute="false"
     strictBinaryOperands="true"
     errorBaseline="psalm-baseline.xml"
 >

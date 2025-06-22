@@ -9,7 +9,7 @@
         "source": "https://github.com/spiral/app"
     },
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.3",
         "spiral/framework": "^3.15.7",
         "spiral/roadrunner-cli": "^2.5",
         "spiral/http": "^3.15",
@@ -53,7 +53,7 @@
         }
     },
     "scripts": {
-        "post-update-cmd": "dload get --no-interaction -v || echo can't dload binaries",
+        "post-update-cmd": "dload get --no-interaction -v || echo \"can't dload binaries\"",
         "post-create-project-cmd": [
             "php app.php encrypt:key -m .env",
             "php app.php configure --quiet",
