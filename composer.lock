@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64642f69079e7604674623974cca8b7f",
+    "content-hash": "1eeabebff2ad7f4c7d13fb7901a757bd",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -5185,56 +5185,6 @@
             "time": "2022-09-19T07:50:08+00:00"
         },
         {
-            "name": "spiral/roadrunner",
-            "version": "v2024.3.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/roadrunner-server/roadrunner.git",
-                "reference": "6c147b5d5bf93e8cb7ab77e3d2e371c119043212"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/roadrunner-server/roadrunner/zipball/6c147b5d5bf93e8cb7ab77e3d2e371c119043212",
-                "reference": "6c147b5d5bf93e8cb7ab77e3d2e371c119043212",
-                "shasum": ""
-            },
-            "type": "metapackage",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anton Titov / Wolfy-J",
-                    "email": "wolfy.jd@gmail.com"
-                },
-                {
-                    "name": "Valery Piashchynski",
-                    "homepage": "https://github.com/rustatian"
-                },
-                {
-                    "name": "RoadRunner Community",
-                    "homepage": "https://github.com/roadrunner-server/roadrunner/graphs/contributors"
-                }
-            ],
-            "description": "RoadRunner: High-performance PHP application server and process manager written in Go and powered with plugins",
-            "homepage": "https://roadrunner.dev/",
-            "support": {
-                "chat": "https://discord.gg/V6EK4he",
-                "docs": "https://roadrunner.dev/docs",
-                "forum": "https://forum.roadrunner.dev/",
-                "issues": "https://github.com/roadrunner-server/roadrunner/issues",
-                "source": "https://github.com/roadrunner-server/roadrunner/tree/v2024.3.5"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/roadrunner-server",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-02-27T17:17:08+00:00"
-        },
-        {
             "name": "spiral/roadrunner-bridge",
             "version": "v4.0.0-RC6",
             "source": {
@@ -8233,16 +8183,16 @@
         },
         {
             "name": "temporal/sdk",
-            "version": "v2.14.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/temporalio/sdk-php.git",
-                "reference": "b9b9d136026e2d4251164d63f86f63fd601d4a6c"
+                "reference": "9a5919afed9995b8bde2ff31b113e8a47fd187c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/temporalio/sdk-php/zipball/b9b9d136026e2d4251164d63f86f63fd601d4a6c",
-                "reference": "b9b9d136026e2d4251164d63f86f63fd601d4a6c",
+                "url": "https://api.github.com/repos/temporalio/sdk-php/zipball/9a5919afed9995b8bde2ff31b113e8a47fd187c8",
+                "reference": "9a5919afed9995b8bde2ff31b113e8a47fd187c8",
                 "shasum": ""
             },
             "require": {
@@ -8256,13 +8206,13 @@
                 "psr/log": "^2.0 || ^3.0.2",
                 "ramsey/uuid": "^4.7.6",
                 "react/promise": "^2.11",
-                "roadrunner-php/roadrunner-api-dto": "^1.10.0",
+                "roadrunner-php/roadrunner-api-dto": "^1.12.0",
                 "roadrunner-php/version-checker": "^1.0.1",
                 "spiral/attributes": "^3.1.8",
-                "spiral/roadrunner": "^2024.3.3 || ^2025.1.1",
+                "spiral/roadrunner": "^2025.1.2",
                 "spiral/roadrunner-cli": "^2.6",
-                "spiral/roadrunner-kv": "^4.3",
-                "spiral/roadrunner-worker": "^3.6.1",
+                "spiral/roadrunner-kv": "^4.3.1",
+                "spiral/roadrunner-worker": "^3.6.2",
                 "symfony/filesystem": "^5.4.45 || ^6.4.13 || ^7.0",
                 "symfony/http-client": "^5.4.49 || ^6.4.17 || ^7.0",
                 "symfony/polyfill-php83": "^1.31.0",
@@ -8273,7 +8223,7 @@
                 "composer/composer": "^2.8.4",
                 "dereuromark/composer-prefer-lowest": "^0.1.10",
                 "doctrine/annotations": "^1.14.4 || ^2.0.2",
-                "internal/dload": "^1.1.0",
+                "internal/dload": "^1.2.0",
                 "jetbrains/phpstorm-attributes": "dev-master",
                 "laminas/laminas-code": "^4.16",
                 "phpunit/phpunit": "10.5.45",
@@ -8287,6 +8237,7 @@
                 "ext-grpc": "For Client calls",
                 "ext-protobuf": "For better performance"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -8318,7 +8269,7 @@
                 "issues": "https://github.com/temporalio/sdk-php/issues",
                 "source": "https://github.com/temporalio/sdk-php"
             },
-            "time": "2025-05-07T11:48:37+00:00"
+            "time": "2025-06-16T13:47:06+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -13880,15 +13831,24 @@
             "time": "2022-06-03T18:03:27+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "temporal/sdk",
+            "version": "9999999-dev",
+            "alias": "2.15.0",
+            "alias_normalized": "2.15.0.0"
+        }
+    ],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "temporal/sdk": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.1",
-        "ext-mbstring": "*",
-        "ext-sockets": "*"
+        "php": ">=8.4",
+        "ext-sockets": "*",
+        "ext-mbstring": "*"
     },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"
