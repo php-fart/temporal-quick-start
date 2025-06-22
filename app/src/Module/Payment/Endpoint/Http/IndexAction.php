@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Endpoint\Http;
+namespace App\Module\Payment\Endpoint\Http;
 
 use Spiral\Router\Annotation\Route;
 use Spiral\Views\ViewsInterface;
