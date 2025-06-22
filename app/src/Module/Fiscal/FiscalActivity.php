@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Fiscal;
+namespace App\Module\Fiscal;
 
 use Temporal\Activity\ActivityInterface;
 use Temporal\Activity\ActivityMethod;

@@ -1,6 +1,8 @@
 version: '3'
+
 rpc:
   listen: 'tcp://127.0.0.1:6001'
+
 http:
   address: '0.0.0.0:8080'
   middleware:
@@ -16,12 +18,17 @@ http:
     num_workers: 2
     supervisor:
       max_worker_memory: 100
+
 server:
   command: 'php app.php'
   relay: pipes
 
+service:
+  temporal:
+    command: "./temporal server start-dev --log-level error --color always"
+
 temporal:
-  address: '127.0.0.1:7233'
+  address: 'localhost:7233'
 
 logs:
   level: info

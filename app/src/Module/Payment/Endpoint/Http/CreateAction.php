@@ -27,8 +27,10 @@ final readonly class CreateAction
     )]
     public function __invoke(): \JsonSerializable
     {
-        $amount = $this->request->data('amount');
+        $amount = (int) $this->request->data('amount', 1000);
         $description = $this->request->data('description', 'No description provided');
+
+        // Validate input
 
         $wf = $this->wf->newWorkflowStub(
             CreatePaymentWorkflow::class,
@@ -47,6 +49,8 @@ final readonly class CreateAction
         );
 
         $result = $run->getResult();
+
+        // Response format
 
         return $result;
     }

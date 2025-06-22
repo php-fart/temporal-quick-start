@@ -7,7 +7,7 @@ namespace App\Module\Payment\Endpoint\Temporal\Dto;
 final readonly class PaymentInfo
 {
     public function __construct(
-        public string $amount,
+        public int $amount,
         public string $description,
     ) {}
 }

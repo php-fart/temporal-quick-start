@@ -62,14 +62,14 @@ class Kernel extends \Spiral\Framework\Kernel
             Framework\Security\GuardBootloader::class,
 
             // Databases
-            CycleBridge\DatabaseBootloader::class,
-            CycleBridge\MigrationsBootloader::class,
-            CycleBridge\DisconnectsBootloader::class,
+//            CycleBridge\DatabaseBootloader::class,
+//            CycleBridge\MigrationsBootloader::class,
+//            CycleBridge\DisconnectsBootloader::class,
 
             // ORM
-            CycleBridge\SchemaBootloader::class,
-            CycleBridge\CycleOrmBootloader::class,
-            CycleBridge\AnnotatedBootloader::class,
+//            CycleBridge\SchemaBootloader::class,
+//            CycleBridge\CycleOrmBootloader::class,
+//            CycleBridge\AnnotatedBootloader::class,
 
             // Sentry and Data collectors
             SentryReporterBootloader::class,

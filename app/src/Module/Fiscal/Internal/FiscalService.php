@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Fiscal\Internal;
+namespace App\Module\Fiscal\Internal;
 
-use App\Fiscal\FiscalActivity;
-use App\Fiscal\FiscalInfo;
+use App\Module\Fiscal\FiscalActivity;
+use App\Module\Fiscal\FiscalInfo;
 use Temporal\Activity\ActivityMethod;
 use Temporal\Exception\Failure\ApplicationFailure;
 
