@@ -24,11 +24,10 @@ use Temporal\Workflow\WorkflowMethod;
 #[WorkflowInterface]
 final readonly class CreatePaymentWorkflow
 {
-    const string TASK_QUEUE = 'payment_queue';
+    public const string TASK_QUEUE = 'payment_queue';
 
     private ActivityProxy|PaymentTransactionActivity $pay;
     private ActivityProxy|FiscalActivity $fiscalCode;
-
 
     public function __construct()
     {

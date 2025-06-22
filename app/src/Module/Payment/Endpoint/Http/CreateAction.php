@@ -6,13 +6,11 @@ namespace App\Module\Payment\Endpoint\Http;
 
 use App\Module\Payment\Endpoint\Temporal\CreatePaymentWorkflow;
 use App\Module\Payment\Endpoint\Temporal\Dto\PaymentInfo;
-use App\Module\Payment\Endpoint\Temporal\Dto\Transaction;
 use Carbon\CarbonInterval;
 use Spiral\Http\Request\InputManager;
 use Spiral\Router\Annotation\Route;
 use Temporal\Client\WorkflowClientInterface;
 use Temporal\Client\WorkflowOptions;
-use Temporal\Exception\Failure\CanceledFailure;
 
 final readonly class CreateAction
 {
