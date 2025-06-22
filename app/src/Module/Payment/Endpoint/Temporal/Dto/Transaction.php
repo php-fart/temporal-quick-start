@@ -9,20 +9,22 @@ use Ramsey\Uuid\UuidInterface;
 final readonly class Transaction implements \JsonSerializable
 {
     public function __construct(
-        public UuidInterface $transactionUuid,
-        public UuidInterface $fiscalCodeUuid,
         public PaymentInfo $paymentInfo,
-        public TransactionStatus $status,
+        public TransactionResult $transactionResult,
+        public UuidInterface $fiscalCodeUuid,
         public \DateTimeImmutable $createdAt,
     ) {}
 
     public function jsonSerialize(): array
     {
         return [
-            'transaction_uuid' => $this->transactionUuid->toString(),
+            'transaction' => [
+                'uuid' => $this->transactionResult->transaction->toString(),
+                'status' => $this->transactionResult->status->name,
+                'error' => $this->transactionResult->error,
+            ],
             'fiscal_code_uuid' => $this->fiscalCodeUuid->toString(),
             'payment_info' => $this->paymentInfo,
-            'status' => $this->status->name,
             'created_at' => $this->createdAt->format(\DateTimeInterface::ATOM),
         ];
     }
