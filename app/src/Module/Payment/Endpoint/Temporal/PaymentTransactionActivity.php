@@ -26,7 +26,9 @@ final readonly class PaymentTransactionActivity
     #[ActivityMethod]
     public function handle(PaymentInfo $info, UuidInterface $transactionUuid): TransactionResult
     {
-        // Simulate some processing logic
+        \mt_rand(0, 100) > 50 or throw new TransactionException(
+            'Something went wrong during the transaction processing.',
+        );
 
         return new TransactionResult(
             transaction: $transactionUuid,

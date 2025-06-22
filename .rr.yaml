@@ -23,10 +23,6 @@ server:
   command: 'php app.php'
   relay: pipes
 
-service:
-  temporal:
-    command: "./temporal server start-dev --log-level error --color always"
-
 temporal:
   address: 'localhost:7233'
 

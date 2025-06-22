@@ -10,6 +10,7 @@ class FiscalInfo
 {
     public function __construct(
         public UuidInterface $uuid,
+        public UuidInterface $transactionUuid,
         public int $amount,
     ) {}
 }

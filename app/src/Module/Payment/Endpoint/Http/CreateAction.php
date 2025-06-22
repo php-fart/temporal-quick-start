@@ -12,6 +12,7 @@ use Spiral\Http\Request\InputManager;
 use Spiral\Router\Annotation\Route;
 use Temporal\Client\WorkflowClientInterface;
 use Temporal\Client\WorkflowOptions;
+use Temporal\Exception\Failure\CanceledFailure;
 
 final readonly class CreateAction
 {

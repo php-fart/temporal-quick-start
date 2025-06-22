@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Module\Payment\Endpoint\Temporal;
 
+use App\Module\Fiscal\FiscalActivity;
+use App\Module\Fiscal\FiscalInfo;
 use App\Module\Payment\Endpoint\Temporal\Dto\PaymentInfo;
 use App\Module\Payment\Endpoint\Temporal\Dto\Transaction;
 use Carbon\CarbonInterval;
 use Spiral\TemporalBridge\Attribute\AssignWorker;
 use Temporal\Activity\ActivityOptions;
 use Temporal\Common\RetryOptions;
+use Temporal\DataConverter\EncodedValues;
 use Temporal\Exception\Failure\ActivityFailure;
 use Temporal\Exception\Failure\CanceledFailure;
 use Temporal\Internal\Workflow\ActivityProxy;
@@ -24,6 +27,8 @@ final readonly class CreatePaymentWorkflow
     const string TASK_QUEUE = 'payment_queue';
 
     private ActivityProxy|PaymentTransactionActivity $pay;
+    private ActivityProxy|FiscalActivity $fiscalCode;
+
 
     public function __construct()
     {
@@ -33,9 +38,20 @@ final readonly class CreatePaymentWorkflow
                 ->withStartToCloseTimeout(CarbonInterval::minute())
                 ->withRetryOptions(
                     RetryOptions::new()
-                        ->withMaximumAttempts(1),
+                        ->withMaximumAttempts(10),
                 )
                 ->withTaskQueue(PaymentTransactionActivity::TASK_QUEUE),
+        );
+
+        $this->fiscalCode = Workflow::newActivityStub(
+            FiscalActivity::class,
+            ActivityOptions::new()
+                ->withStartToCloseTimeout(CarbonInterval::minute())
+                ->withRetryOptions(
+                    RetryOptions::new()
+                        ->withMaximumAttempts(5),
+                )
+                ->withTaskQueue(FiscalActivity::TASK_QUEUE),
         );
     }
 
@@ -47,26 +63,37 @@ final readonly class CreatePaymentWorkflow
     public function pay(PaymentInfo $info)
     {
         $transactionUuid = yield Workflow::uuid7();
-        $fiscalCodeUuid = yield Workflow::uuid7();
 
         try {
             $transactionResult = yield $this->pay->handle($info, $transactionUuid);
         } catch (ActivityFailure $e) {
-            trap($e);
-
             throw new CanceledFailure(
-                'Payment transaction failed',
-                $e->getCode(),
-                $e,
+                'Payment transaction was canceled due to an error',
+                EncodedValues::fromValues([
+                    'result' => new Transaction(
+                        paymentInfo: $info,
+                        transactionResult: null,
+                        fiscalCode: null,
+                        createdAt: yield Workflow::now(),
+                    ),
+                ]),
             );
         }
 
-        // Simulate some processing time
+        $fiscalCodeUuid = yield Workflow::uuid7();
+
+        $fiscalCodeStatus = yield $this->fiscalCode->fart(
+            new FiscalInfo(
+                uuid: $fiscalCodeUuid,
+                transactionUuid: $transactionUuid,
+                amount: $info->amount,
+            ),
+        );
 
         return new Transaction(
             paymentInfo: $info,
             transactionResult: $transactionResult,
-            fiscalCodeUuid: $fiscalCodeUuid,
+            fiscalCode: $fiscalCodeStatus,
             createdAt: yield Workflow::now(),
         );
     }
